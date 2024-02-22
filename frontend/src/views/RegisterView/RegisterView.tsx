@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -8,8 +8,14 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
+import { registerUser } from "../../api/authService";
+import { AuthContext } from "../../contexts/Auth/provider";
 
 const RegisterView = () => {
+  const {
+    state: { loading },
+    dispatch: authDispatch,
+  } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -38,10 +44,29 @@ const RegisterView = () => {
     setIsEmailValid(emailRegex.test(email));
   }, [email]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordsMatch && isEmailValid && password && email) {
-      // todo: proceed with registration logic
+      authDispatch({
+        type: "auth_loading",
+      });
+      const response = await registerUser({
+        email,
+        password,
+      });
+      if (response?.token) {
+        authDispatch({
+          type: "auth_successful",
+          payload: {
+            token: response.token,
+            email,
+          },
+        });
+      } else {
+        authDispatch({
+          type: "auth_failed",
+        });
+      }
     }
   };
 
@@ -107,7 +132,8 @@ const RegisterView = () => {
               color="black"
               fluid
               size="large"
-              disabled={!passwordsMatch || !isEmailValid}
+              loading={loading}
+              disabled={!passwordsMatch || !isEmailValid || loading}
             >
               Register
             </Button>

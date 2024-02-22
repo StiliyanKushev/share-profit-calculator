@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
 import {
   Button,
@@ -8,8 +8,14 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
+import { loginUser } from "../../api/authService";
+import { AuthContext } from "../../contexts/Auth/provider";
 
 const LoginView = () => {
+  const {
+    state: { loading },
+    dispatch: authDispatch,
+  } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -26,10 +32,29 @@ const LoginView = () => {
     setIsPasswordValid(password.length >= 8 || password === "");
   }, [password]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid && email && password) {
-      // TODO: Proceed with login logic here
+      authDispatch({
+        type: "auth_loading",
+      });
+      const response = await loginUser({
+        email,
+        password,
+      });
+      if (response?.token) {
+        authDispatch({
+          type: "auth_successful",
+          payload: {
+            token: response.token,
+            email,
+          },
+        });
+      } else {
+        authDispatch({
+          type: "auth_failed",
+        });
+      }
     }
   };
 
@@ -78,8 +103,13 @@ const LoginView = () => {
               color="black"
               fluid
               size="large"
+              loading={loading}
               disabled={
-                !isEmailValid || !isPasswordValid || !email || !password
+                !isEmailValid ||
+                !isPasswordValid ||
+                !email ||
+                !password ||
+                loading
               }
             >
               Login

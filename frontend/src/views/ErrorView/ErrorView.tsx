@@ -1,25 +1,25 @@
-import { Container, Header } from "semantic-ui-react";
+import { Container, Header, Icon } from "semantic-ui-react";
 
-const styles = {
-  height: "100%",
-  justifyContent: "center",
-  alignItems: "center",
-  display: "flex",
-};
-
-const headerStyles = {
-  fontSize: "6rem",
-};
-
-const ErrorView = () => (
-  <div className="view-container" style={styles}>
-    <Container style={{ marginTop: "-5rem" }} textAlign="center">
-      <Header size="huge">
-        <span style={headerStyles}>404</span> Not Found
+const ErrorView = () => {
+  return (
+    <Container
+      textAlign="center"
+      style={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Header as="h1" icon>
+        <Icon name="warning circle" size="massive" />
+        404
+        <Header.Subheader>Page Not Found</Header.Subheader>
       </Header>
-      <Header size="medium">The page you are looking for doesn't exist.</Header>
+      <Header as="h2">The page you are looking for doesn't exist.</Header>
     </Container>
-  </div>
-);
+  );
+};
 
 export default ErrorView;

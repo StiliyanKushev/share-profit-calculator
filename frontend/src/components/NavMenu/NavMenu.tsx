@@ -4,8 +4,17 @@ import { Container, Dropdown, Icon, Menu } from "semantic-ui-react";
 import { AuthContext } from "../../contexts/Auth/provider";
 
 const NavMenu = () => {
-  const { state: authState } = useContext(AuthContext);
+  const { state: authState, dispatch: authDispatch } = useContext(AuthContext);
   const isLoggedIn = authState.isLoggedIn;
+
+  const handleLogoutClicked = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    authDispatch({
+      type: "auth_logout",
+    });
+  };
 
   return (
     <Menu fixed="top" borderless size="large">
@@ -15,7 +24,7 @@ const NavMenu = () => {
         </Menu.Item>
         <Menu.Menu position="right">
           {isLoggedIn ? (
-            <Menu.Item as={Link} to="/logout">
+            <Menu.Item as={Link} onClick={handleLogoutClicked}>
               <Icon name="sign out" size="large" />
               Logout
             </Menu.Item>
