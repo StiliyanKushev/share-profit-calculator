@@ -140,6 +140,26 @@ This operation does not require authentication
 This operation does not require authentication
 </aside>
 
+<h1 id="docs-stocks">stocks</h1>
+
+## StocksController_solve
+
+<a id="opIdStocksController_solve"></a>
+
+`POST /stocks/solve`
+
+<h3 id="stockscontroller_solve-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successfully found a solution|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|dto is invalid or dates are invalid|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|access token has expired|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 # Schemas
 
 <h2 id="tocS_SignUpDto">SignUpDto</h2>
