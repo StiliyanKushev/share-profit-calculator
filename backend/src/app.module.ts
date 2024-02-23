@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { configSchema } from 'config.schema';
 import { DatabaseModule } from 'database/database.module';
+import { IamModule } from 'iam/iam.module';
 import { RedisModule } from 'redis/redis.module';
+import { UsersModule } from 'users/users.module';
 import { ValidationModule } from 'validation/validation.module';
 import { LoggingModule } from './logging/logging.module';
 import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
@@ -20,8 +22,10 @@ import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
     ValidationModule.forRoot(),
 
     /**
-     * todo: import all feature modules
+     * import all feature modules
      */
+    UsersModule,
+    IamModule,
   ],
 })
 export class AppModule {}
