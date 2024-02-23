@@ -44,7 +44,7 @@ jobs:
               npm run build
 
               # kill anything running from a previous session
-              sudo fuser -k 3000/tcp || true
+              pm2 delete backend
               sudo docker stop $(sudo docker ps -a -q) || true
 
               # write the production env file using secrets
@@ -75,5 +75,5 @@ jobs:
               echo "CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}"                     >> .env
 
               npm run docker:prepare
-              npm run start:prod &
+              pm2 start dist/main.js --name backend
           EOF
