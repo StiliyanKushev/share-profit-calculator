@@ -30,53 +30,53 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.SSH_SERVER_IP }} >> ~/.ssh/known_hosts
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_SERVER_USER }}@${{ secrets.SSH_SERVER_IP }} << 'EOF'
-            set -e
-            cd /root/interview
-            rm -rf share-profit-calculator  # Remove the directory if it exists
-            # Clone the repo using the PAT stored in the GitHub secret
-            git clone https://\${{ secrets.PAT }}:x-oauth-basic@github.com/StiliyanKushev/share-profit-calculator.git
-            cd ./share-profit-calculator/backend
+              set -e
+              cd /root/interview
+              rm -rf share-profit-calculator  # Remove the directory if it exists
+              # Clone the repo using the PAT stored in the GitHub secret
+              git clone https://\${{ secrets.PAT }}:x-oauth-basic@github.com/StiliyanKushev/share-profit-calculator.git
+              cd ./share-profit-calculator/backend
 
-            # source nvm to work in the non-interactive shell used by the ci
-            source ~/.nvm/nvm.sh
+              # source nvm to work in the non-interactive shell used by the ci
+              source ~/.nvm/nvm.sh
 
-            npm ci
-            npm run build
+              npm ci
+              npm run build
 
-            # write the production env file using secrets
-            cat << 'ENV' > .env
-                # MISC
-                ENVIRONMENT=production
-                MINIMUM_LOG_LEVEL=debug
+              # write the production env file using secrets
+              cat << 'ENV'
+                  # MISC
+                  ENVIRONMENT=production
+                  MINIMUM_LOG_LEVEL=debug
 
-                # SWAGGER
-                SWAGGER_TITLE=Docs Title
-                SWAGGER_DESCRIPTION=Docs Description
-                SWAGGER_VERSION=0.0.1
+                  # SWAGGER
+                  SWAGGER_TITLE=Docs Title
+                  SWAGGER_DESCRIPTION=Docs Description
+                  SWAGGER_VERSION=0.0.1
 
-                # JWT
-                JWT_SECRET=${{ secrets.JWT_SECRET }}
-                JWT_TOKEN_AUDIENCE=${{ secrets.JWT_TOKEN_AUDIENCE }}
-                JWT_TOKEN_ISSUER=${{ secrets.JWT_TOKEN_ISSUER }}
-                JWT_ACCESS_TOKEN_TTL=3600
-                JWT_REFRESH_TOKEN_TTL=86400
+                  # JWT
+                  JWT_SECRET=${{ secrets.JWT_SECRET }}
+                  JWT_TOKEN_AUDIENCE=${{ secrets.JWT_TOKEN_AUDIENCE }}
+                  JWT_TOKEN_ISSUER=${{ secrets.JWT_TOKEN_ISSUER }}
+                  JWT_ACCESS_TOKEN_TTL=3600
+                  JWT_REFRESH_TOKEN_TTL=86400
 
-                # DB
-                POSTGRES_HOST=localhost
-                POSTGRES_PORT=5432
-                POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
-                POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-                POSTGRES_DATABASE=postgres
+                  # DB
+                  POSTGRES_HOST=localhost
+                  POSTGRES_PORT=5432
+                  POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
+                  POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+                  POSTGRES_DATABASE=postgres
 
-                # REDIS
-                REDIS_HOST=localhost
-                REDIS_PORT=6379
+                  # REDIS
+                  REDIS_HOST=localhost
+                  REDIS_PORT=6379
 
-                # CORS
-                CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
-                
-            ENV
+                  # CORS
+                  CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
+              ENV
+              > .env
 
-            npm run docker:prepare
-            npm run start:prod
+              npm run docker:prepare
+              npm run start:prod
           EOF
