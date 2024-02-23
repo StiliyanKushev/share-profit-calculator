@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '${REDIS_PORT}:6379'
+  test-db:
+    image: postgres
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_PASSWORD=pass123
+  test-redis:
+    image: redis
+    restart: always
+    ports:
+      - '6380:6379'
