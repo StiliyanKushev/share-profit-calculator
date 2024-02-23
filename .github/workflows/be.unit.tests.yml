@@ -7,6 +7,12 @@ on:
     paths:
       - "backend/src/**"
       - ".github/workflows/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "backend/src/**"
+      - ".github/workflows/**"
 
 jobs:
   build:
