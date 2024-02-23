@@ -45,35 +45,36 @@ jobs:
 
             # write the production env file using secrets
             cat << 'ENV' > .env
-            # MISC
-            ENVIRONMENT=production
-            MINIMUM_LOG_LEVEL=debug
+                # MISC
+                ENVIRONMENT=production
+                MINIMUM_LOG_LEVEL=debug
 
-            # SWAGGER
-            SWAGGER_TITLE=Docs Title
-            SWAGGER_DESCRIPTION=Docs Description
-            SWAGGER_VERSION=0.0.1
+                # SWAGGER
+                SWAGGER_TITLE=Docs Title
+                SWAGGER_DESCRIPTION=Docs Description
+                SWAGGER_VERSION=0.0.1
 
-            # JWT
-            JWT_SECRET=${{ secrets.JWT_SECRET }}
-            JWT_TOKEN_AUDIENCE=${{ secrets.JWT_TOKEN_AUDIENCE }}
-            JWT_TOKEN_ISSUER=${{ secrets.JWT_TOKEN_ISSUER }}
-            JWT_ACCESS_TOKEN_TTL=3600
-            JWT_REFRESH_TOKEN_TTL=86400
+                # JWT
+                JWT_SECRET=${{ secrets.JWT_SECRET }}
+                JWT_TOKEN_AUDIENCE=${{ secrets.JWT_TOKEN_AUDIENCE }}
+                JWT_TOKEN_ISSUER=${{ secrets.JWT_TOKEN_ISSUER }}
+                JWT_ACCESS_TOKEN_TTL=3600
+                JWT_REFRESH_TOKEN_TTL=86400
 
-            # DB
-            POSTGRES_HOST=localhost
-            POSTGRES_PORT=5432
-            POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
-            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            POSTGRES_DATABASE=postgres
+                # DB
+                POSTGRES_HOST=localhost
+                POSTGRES_PORT=5432
+                POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }}
+                POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+                POSTGRES_DATABASE=postgres
 
-            # REDIS
-            REDIS_HOST=localhost
-            REDIS_PORT=6379
+                # REDIS
+                REDIS_HOST=localhost
+                REDIS_PORT=6379
 
-            # CORS
-            CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
+                # CORS
+                CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
+                
             ENV
 
             npm run docker:prepare
