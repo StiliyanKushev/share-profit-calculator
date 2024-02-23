@@ -13,6 +13,6 @@ async function bootstrap() {
     omitHeader: true,
   });
   fs.writeFileSync('./API_DOCUMENTATION.md', docs);
-  process.exit();
+  process.exit(0);
 }
 bootstrap();
