@@ -1,5 +1,7 @@
+import { databaseConfigSchema } from 'database/config/database.config';
 import Joi from 'joi';
 import { loggingConfigSchema } from 'logging/config/logging.config';
+import { redisConfigSchema } from 'redis/config/redis.config';
 import { swaggerConfigSchema } from 'swagger-setup/config/swagger.config';
 
 /**
@@ -9,7 +11,9 @@ import { swaggerConfigSchema } from 'swagger-setup/config/swagger.config';
 /* istanbul ignore next */
 export const configSchema = Joi.object({
   ...loggingConfigSchema,
+  ...redisConfigSchema,
   ...swaggerConfigSchema,
+  ...databaseConfigSchema,
 
   /**
    * Include additional core validations
