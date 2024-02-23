@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "../../contexts/Auth/provider";
 
+import { StockProvider } from "../../contexts/Stock/provider";
 import ErrorView from "../../views/ErrorView/ErrorView";
 import HomeView from "../../views/HomeView/HomeView";
 import LoginView from "../../views/LoginView/LoginView";
@@ -15,7 +16,15 @@ const MainContent = () => {
     <Routes>
       <Route
         path="/"
-        element={isLoggedIn ? <HomeView /> : <Navigate to="/login" replace />}
+        element={
+          isLoggedIn ? (
+            <StockProvider>
+              <HomeView />
+            </StockProvider>
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
       />
       <Route
         path="/login"

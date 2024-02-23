@@ -23,7 +23,7 @@ const LoginView = () => {
 
   // Email validation effect
   useEffect(() => {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     setIsEmailValid(emailRegex.test(email) || email === "");
   }, [email]);
 
