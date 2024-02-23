@@ -5,13 +5,15 @@ export const cookies = new Cookies();
 export interface IAuthState {
   isLoggedIn: boolean;
   email: string;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   loading: boolean;
 }
 
 export const initialState: IAuthState = {
   isLoggedIn: cookies.get("isLogged") || false,
-  token: cookies.get("token") || "",
+  accessToken: cookies.get("accessToken") || "",
+  refreshToken: cookies.get("refreshToken") || "",
   email: cookies.get("email") || "",
   loading: false,
 };
@@ -19,7 +21,7 @@ export const initialState: IAuthState = {
 export type AuthAction =
   | {
       type: "auth_successful";
-      payload: { email: string; token: string };
+      payload: { email: string; accessToken: string; refreshToken: string };
     }
   | {
       type: "auth_loading";
@@ -42,13 +44,17 @@ export const reducer = (state: IAuthState, action: AuthAction): IAuthState => {
     }
 
     case "auth_successful": {
-      const { email, token } = action.payload;
+      const { email, accessToken, refreshToken } = action.payload;
       return {
         ...state,
         loading: false,
         isLoggedIn: (cookies.set("isLogged", true) as undefined) ?? true,
         email: (cookies.set("email", email) as undefined) ?? email,
-        token: (cookies.set("token", token) as undefined) ?? token,
+        accessToken:
+          (cookies.set("accessToken", accessToken) as undefined) ?? accessToken,
+        refreshToken:
+          (cookies.set("refreshToken", refreshToken) as undefined) ??
+          refreshToken,
       };
     }
 
@@ -64,7 +70,8 @@ export const reducer = (state: IAuthState, action: AuthAction): IAuthState => {
       return {
         ...state,
         isLoggedIn: (cookies.remove("isLogged") as undefined) ?? false,
-        token: (cookies.remove("token") as undefined) ?? "",
+        accessToken: (cookies.remove("accessToken") as undefined) ?? "",
+        refreshToken: (cookies.remove("refreshToken") as undefined) ?? "",
         email: (cookies.remove("email") as undefined) ?? "",
         loading: false,
       };

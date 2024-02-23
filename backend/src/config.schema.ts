@@ -1,3 +1,4 @@
+import { corsConfigSchema } from 'cors/config/cors.config';
 import { databaseConfigSchema } from 'database/config/database.config';
 import Joi from 'joi';
 import { loggingConfigSchema } from 'logging/config/logging.config';
@@ -14,6 +15,7 @@ export const configSchema = Joi.object({
   ...redisConfigSchema,
   ...swaggerConfigSchema,
   ...databaseConfigSchema,
+  ...corsConfigSchema,
 
   /**
    * Include additional core validations

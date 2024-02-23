@@ -42,11 +42,12 @@ const LoginView: React.FC = () => {
         email,
         password,
       });
-      if (response?.token) {
+      if (response?.accessToken) {
         authDispatch({
           type: "auth_successful",
           payload: {
-            token: response.token,
+            accessToken: response.accessToken,
+            refreshToken: response.refreshToken,
             email,
           },
         });

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { configSchema } from 'config.schema';
+import { CorsModule } from 'cors/cors.module';
 import { DatabaseModule } from 'database/database.module';
 import { IamModule } from 'iam/iam.module';
 import { RedisModule } from 'redis/redis.module';
@@ -20,6 +21,7 @@ import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
     RedisModule.forRoot(),
     SwaggerSetupModule.forRoot(),
     ValidationModule.forRoot(),
+    CorsModule.forRoot(),
 
     /**
      * import all feature modules
