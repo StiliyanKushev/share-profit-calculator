@@ -8,13 +8,13 @@ on:
       - main
     paths:
       - "backend/src/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.api.docs.yml"
   pull_request:
     branches:
       - main
     paths:
       - "backend/src/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.api.docs.yml"
 
 jobs:
   build:

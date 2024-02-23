@@ -7,14 +7,14 @@ on:
     paths:
       - "backend/src/**"
       - "backend/test/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.deploy.yml"
   pull_request:
     branches:
       - main
     paths:
       - "backend/src/**"
       - "backend/test/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.deploy.yml"
 
 jobs:
   deploy:
@@ -37,5 +37,4 @@ jobs:
             rm -rf share-profit-calculator  # Remove the directory if it exists
             # Clone the repo using the PAT stored in the GitHub secret
             git clone https://\${{ secrets.PAT }}:x-oauth-basic@github.com/StiliyanKushev/share-profit-calculator.git
-            # Add any additional setup or deployment commands here
           EOF

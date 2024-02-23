@@ -6,13 +6,13 @@ on:
       - main
     paths:
       - "backend/src/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.unit.tests.yml"
   pull_request:
     branches:
       - main
     paths:
       - "backend/src/**"
-      - ".github/workflows/**"
+      - ".github/workflows/be.unit.tests.yml"
 
 jobs:
   build:

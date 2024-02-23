@@ -6,13 +6,13 @@ on:
       - main
     paths:
       - "frontend/**"
-      - ".github/workflows/**"
+      - ".github/workflows/fe.prod.release.yml"
   pull_request:
     branches:
       - main
     paths:
       - "frontend/**"
-      - ".github/workflows/**"
+      - ".github/workflows/fe.prod.release.yml"
 
 jobs:
   build-and-deploy:
