@@ -36,6 +36,10 @@ jobs:
             # Clone the repo using the PAT stored in the GitHub secret
             git clone https://\${{ secrets.PAT }}:x-oauth-basic@github.com/StiliyanKushev/share-profit-calculator.git
             cd ./share-profit-calculator/backend
+
+            # source nvm to work in the non-interactive shell used by the ci
+            source ~/.nvm/nvm.sh
+
             npm ci
             npm run build
 
