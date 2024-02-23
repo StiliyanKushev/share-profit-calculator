@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { configSchema } from 'config.schema';
 import { DatabaseModule } from 'database/database.module';
 import { RedisModule } from 'redis/redis.module';
+import { ValidationModule } from 'validation/validation.module';
 import { LoggingModule } from './logging/logging.module';
 import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
 
@@ -16,6 +17,7 @@ import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
     DatabaseModule.forRoot(),
     RedisModule.forRoot(),
     SwaggerSetupModule.forRoot(),
+    ValidationModule.forRoot(),
 
     /**
      * todo: import all feature modules
