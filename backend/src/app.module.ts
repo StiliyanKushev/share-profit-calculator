@@ -1,10 +1,21 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { configSchema } from 'config.schema';
+import { LoggingModule } from './logging/logging.module';
+import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    /**
+     * import all globally scoped core modules
+     */
+    ConfigModule.forRoot({ validationSchema: configSchema }),
+    LoggingModule.forRoot(),
+    SwaggerSetupModule.forRoot(),
+
+    /**
+     * todo: import all feature modules
+     */
+  ],
 })
 export class AppModule {}
