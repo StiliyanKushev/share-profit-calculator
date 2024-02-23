@@ -30,6 +30,10 @@ jobs:
         run: npm run build
         working-directory: ./frontend
 
+      - name: Patch 404
+        run: cp ./build/index.html ./build/404.html
+        working-directory: ./frontend
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
