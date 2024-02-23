@@ -44,7 +44,7 @@ jobs:
               npm run build
 
               # kill anything running from a previous session
-              pm2 delete backend
+              pm2 delete backend || true
               sudo docker stop $(sudo docker ps -a -q) || true
 
               # write the production env file using secrets
