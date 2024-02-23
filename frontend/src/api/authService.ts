@@ -1,5 +1,5 @@
 import config from "../config/config";
-import { handleResponse, withCredentials } from "./helperService";
+import { ResponseAny, handleResponse, withCredentials } from "./helperService";
 
 interface IAuthResponse {
   accessToken: string;
@@ -15,11 +15,11 @@ export const loginUser = async (credentials: {
     {
       method: "POST",
       credentials: "same-origin",
-      headers: withCredentials({ "Content-Type": "application/json" }),
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     }
   ).catch(() => undefined);
-  return handleResponse<IAuthResponse>(response);
+  return handleResponse<IAuthResponse, false>(response);
 };
 
 export const registerUser = async (credentials: {
@@ -31,11 +31,27 @@ export const registerUser = async (credentials: {
     {
       method: "POST",
       credentials: "same-origin",
-      headers: withCredentials({ "Content-Type": "application/json" }),
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     }
   ).catch(() => undefined);
-  return handleResponse<IAuthResponse>(response);
+  return handleResponse<IAuthResponse, false>(response);
 };
 
-// todo: refresh token impl
+export const refreshToken = async (dto: {
+  refreshToken: string;
+}): Promise<ResponseAny<IAuthResponse, true>> => {
+  const response = await fetch(
+    `${config.API_BASE_URL}/authentication/refresh-token`,
+    {
+      method: "POST",
+      credentials: "same-origin",
+      headers: withCredentials({ "Content-Type": "application/json" }),
+      body: JSON.stringify(dto),
+    }
+  ).catch(() => undefined);
+  return handleResponse<IAuthResponse>(
+    response,
+    false /* we don't want to handle unauthorized */
+  );
+};

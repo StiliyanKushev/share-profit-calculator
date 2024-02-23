@@ -1,5 +1,9 @@
 import config from "../config/config";
-import { handleResponse, withCredentials } from "./helperService";
+import {
+  ResponseUnauthorizedRetry,
+  handleResponse,
+  withCredentials,
+} from "./helperService";
 
 export interface IStockQueryResult {
   buyDate: string;
@@ -21,5 +25,11 @@ export const findSolution = async (settings: {
     headers: withCredentials({ "Content-Type": "application/json" }),
     body: JSON.stringify(settings),
   }).catch(() => undefined);
-  return handleResponse<IStockQueryResult>(response);
+  const parsed = await handleResponse<IStockQueryResult>(response);
+
+  if (parsed === ResponseUnauthorizedRetry) {
+    return findSolution(settings);
+  }
+
+  return parsed;
 };
