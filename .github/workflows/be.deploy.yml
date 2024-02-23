@@ -44,6 +44,7 @@ jobs:
               npm run build
 
               # write the production env file using secrets
+              touch .env
               echo "# MISC" >> .env
               echo "ENVIRONMENT=production" >> .env
               echo "MINIMUM_LOG_LEVEL=debug" >> .env
