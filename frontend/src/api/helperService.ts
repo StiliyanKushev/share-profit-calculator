@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { cookies } from "../contexts/Auth/reducer";
 
 export const handleResponse = async <T>(
   response: Response
@@ -13,6 +14,6 @@ export const handleResponse = async <T>(
 export const withCredentials = (headers: HeadersInit): HeadersInit => {
   return {
     ...headers,
-    // todo: add jwt token
+    Authorization: `Bearer ${cookies.get("token")}`,
   };
 };
