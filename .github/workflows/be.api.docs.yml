@@ -66,5 +66,5 @@ jobs:
         run: |
           git add ./API_DOCUMENTATION.md -f
           git commit -m "docs: update"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/StiliyanKushev/share-profit-calculator.git main
+          git push https://${{ secrets.PAT }}@github.com/StiliyanKushev/share-profit-calculator.git main
         working-directory: ./backend
