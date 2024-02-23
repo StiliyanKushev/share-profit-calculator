@@ -14,7 +14,7 @@ export const loginUser = async (credentials: {
     credentials: "same-origin",
     headers: withCredentials({ "Content-Type": "application/json" }),
     body: JSON.stringify(credentials),
-  });
+  }).catch(() => undefined);
   return handleResponse<IAuthResponse>(response);
 };
 
@@ -27,6 +27,6 @@ export const registerUser = async (credentials: {
     credentials: "same-origin",
     headers: withCredentials({ "Content-Type": "application/json" }),
     body: JSON.stringify(credentials),
-  });
+  }).catch(() => undefined);
   return handleResponse<IAuthResponse>(response);
 };

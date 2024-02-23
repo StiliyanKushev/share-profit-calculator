@@ -20,6 +20,6 @@ export const findSolution = async (settings: {
     credentials: "same-origin",
     headers: withCredentials({ "Content-Type": "application/json" }),
     body: JSON.stringify(settings),
-  });
+  }).catch(() => undefined);
   return handleResponse<IStockQueryResult>(response);
 };
