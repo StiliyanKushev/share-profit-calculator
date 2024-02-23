@@ -1,0 +1,64 @@
+name: Generate Backend OpenAPI Docs
+
+permissions: write-all
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/src/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          # We need to use PAT alongside this
+          # see: https://github.com/orgs/community/discussions/26220
+          persist-credentials: false
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.x
+
+      - name: Configure Git
+        run: |
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "${{ github.actor }}"
+
+      - name: Install Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install ca-certificates curl
+          sudo install -m 0755 -d /etc/apt/keyrings
+          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+          sudo chmod a+r /etc/apt/keyrings/docker.asc
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get update
+          sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          sudo systemctl start docker
+          sudo docker --version
+          sudo docker-compose --version
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Prepare .env
+        run: cp .env.e2e .env
+
+      - name: Prepare containers
+        run: sudo npm run docker:prepare
+
+      - name: Generate the docs markdown
+        run: npm run docs
+
+      - name: Upload new docs
+        run: |
+          git add ./API_DOCUMENTATION.md -f
+          git commit -m "docs: update"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/StiliyanKushev/share-profit-calculator.git main

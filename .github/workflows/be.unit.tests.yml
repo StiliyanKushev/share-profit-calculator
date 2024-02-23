@@ -1,0 +1,33 @@
+name: Run Backend Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/src/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./backend
+
+      - name: Run Tests
+        run: npm run test
+        working-directory: ./backend

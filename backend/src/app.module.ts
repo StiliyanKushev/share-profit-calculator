@@ -1,10 +1,31 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { configSchema } from 'config.schema';
+import { DatabaseModule } from 'database/database.module';
+import { IamModule } from 'iam/iam.module';
+import { RedisModule } from 'redis/redis.module';
+import { UsersModule } from 'users/users.module';
+import { ValidationModule } from 'validation/validation.module';
+import { LoggingModule } from './logging/logging.module';
+import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    /**
+     * import all globally scoped core modules
+     */
+    ConfigModule.forRoot({ validationSchema: configSchema }),
+    LoggingModule.forRoot(),
+    DatabaseModule.forRoot(),
+    RedisModule.forRoot(),
+    SwaggerSetupModule.forRoot(),
+    ValidationModule.forRoot(),
+
+    /**
+     * import all feature modules
+     */
+    UsersModule,
+    IamModule,
+  ],
 })
 export class AppModule {}
