@@ -8,6 +8,7 @@ import { RedisModule } from 'redis/redis.module';
 import { UsersModule } from 'users/users.module';
 import { ValidationModule } from 'validation/validation.module';
 import { LoggingModule } from './logging/logging.module';
+import { StocksModule } from './stocks/stocks.module';
 import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
 
 @Module({
@@ -28,6 +29,7 @@ import { SwaggerSetupModule } from './swagger-setup/swagger-setup.module';
      */
     UsersModule,
     IamModule,
+    StocksModule,
   ],
 })
 export class AppModule {}

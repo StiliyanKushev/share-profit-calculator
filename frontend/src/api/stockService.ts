@@ -15,7 +15,7 @@ export const findSolution = async (settings: {
   endUnixTimestamp: number;
   funds: number;
 }): Promise<IStockQueryResult | undefined> => {
-  const response = await fetch(`${config.API_BASE_URL}/solve`, {
+  const response = await fetch(`${config.API_BASE_URL}/stocks/solve`, {
     method: "POST",
     credentials: "same-origin",
     headers: withCredentials({ "Content-Type": "application/json" }),

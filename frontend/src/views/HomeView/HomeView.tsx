@@ -120,11 +120,13 @@ const HomeView: React.FC = () => {
                 <p>
                   Buy Date: {result.buyDate}
                   <br />
-                  Buy Price: ${result.buyPrice} per share Sell Date:{" "}
-                  {result.sellDate}
+                  Buy Price: ${result.buyPrice} per share
                   <br />
-                  Sell Price: ${result.sellPrice} per share Shares Bought:{" "}
-                  {result.sharesBought}
+                  Sell Date: {result.sellDate}
+                  <br />
+                  Sell Price: ${result.sellPrice} per share
+                  <br />
+                  Shares Bought: {result.sharesBought}
                   <br />
                   Total Investment: $
                   {(result.buyPrice * result.sharesBought).toFixed(2)}

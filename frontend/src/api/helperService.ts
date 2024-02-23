@@ -18,6 +18,6 @@ export const handleResponse = async <T>(
 export const withCredentials = (headers: HeadersInit): HeadersInit => {
   return {
     ...headers,
-    Authorization: `Bearer ${cookies.get("token")}`,
+    Authorization: `Bearer ${cookies.get("accessToken")}`,
   };
 };
