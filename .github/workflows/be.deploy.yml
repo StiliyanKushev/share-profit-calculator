@@ -44,8 +44,8 @@ jobs:
               npm run build
 
               # kill anything running from a previous session
-              sudo fuser -k 3000/tcp
-              sudo docker stop $(sudo docker ps -a -q)
+              sudo fuser -k 3000/tcp || true
+              sudo docker stop $(sudo docker ps -a -q) || true
 
               # write the production env file using secrets
               touch .env
