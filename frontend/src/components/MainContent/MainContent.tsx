@@ -8,7 +8,7 @@ import HomeView from "../../views/HomeView/HomeView";
 import LoginView from "../../views/LoginView/LoginView";
 import RegisterView from "../../views/RegisterView/RegisterView";
 
-const MainContent = () => {
+const MainContent: React.FC = () => {
   const { state: authState } = useContext(AuthContext);
   const isLoggedIn = authState.isLoggedIn;
 

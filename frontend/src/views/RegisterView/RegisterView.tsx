@@ -11,7 +11,7 @@ import {
 import { registerUser } from "../../api/authService";
 import { AuthContext } from "../../contexts/Auth/provider";
 
-const RegisterView = () => {
+const RegisterView: React.FC = () => {
   const {
     state: { loading },
     dispatch: authDispatch,

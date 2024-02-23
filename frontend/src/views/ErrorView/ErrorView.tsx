@@ -1,6 +1,6 @@
 import { Container, Header, Icon } from "semantic-ui-react";
 
-const ErrorView = () => {
+const ErrorView: React.FC = () => {
   return (
     <Container
       textAlign="center"

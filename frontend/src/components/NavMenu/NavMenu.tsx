@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Dropdown, Icon, Menu } from "semantic-ui-react";
 import { AuthContext } from "../../contexts/Auth/provider";
 
-const NavMenu = () => {
+const NavMenu: React.FC = () => {
   const { state: authState, dispatch: authDispatch } = useContext(AuthContext);
   const isLoggedIn = authState.isLoggedIn;
 

@@ -11,7 +11,7 @@ import {
 import { loginUser } from "../../api/authService";
 import { AuthContext } from "../../contexts/Auth/provider";
 
-const LoginView = () => {
+const LoginView: React.FC = () => {
   const {
     state: { loading },
     dispatch: authDispatch,
