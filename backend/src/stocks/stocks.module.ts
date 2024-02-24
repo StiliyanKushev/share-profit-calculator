@@ -1,18 +1,10 @@
 import { Module } from '@nestjs/common';
+import { StocksDataProvider } from './stocks-data.provider';
 import { StocksController } from './stocks.controller';
 import { StocksService } from './stocks.service';
 
-// warning: chunky boi 🐖
-import stockData from '../assets/stockData.json';
-
 @Module({
-  providers: [
-    StocksService,
-    {
-      provide: 'STOCKS_DATA',
-      useValue: stockData,
-    },
-  ],
+  providers: [StocksDataProvider, StocksService],
   controllers: [StocksController],
 })
 export class StocksModule {}
