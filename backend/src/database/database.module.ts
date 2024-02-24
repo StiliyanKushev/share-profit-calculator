@@ -20,7 +20,7 @@ export class DatabaseModule {
             password: dbConfig.password,
             database: dbConfig.database,
             autoLoadEntities: true,
-            synchronize: dbConfig.development,
+            synchronize: true,
           }),
         }),
       ],
