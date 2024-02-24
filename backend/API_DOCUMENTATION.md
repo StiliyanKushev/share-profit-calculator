@@ -148,12 +148,45 @@ This operation does not require authentication
 
 `POST /stocks/solve`
 
+> Body parameter
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "startUnixTimestamp": {
+      "type": "number",
+      "minimum": 1
+    },
+    "endUnixTimestamp": {
+      "type": "number",
+      "minimum": 1
+    },
+    "funds": {
+      "type": "number",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "startUnixTimestamp",
+    "endUnixTimestamp",
+    "funds"
+  ]
+}
+```
+
+<h3 id="stockscontroller_solve-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[SolveDto](#schemasolvedto)|true|none|
+
 <h3 id="stockscontroller_solve-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successfully found a solution|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|dto is invalid or dates are invalid|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|dto is invalid or dates are invalid or insufficient funds|None|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|access token has expired|None|
 
 <aside class="success">
@@ -257,4 +290,45 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |refreshToken|string|true|none|none|
+
+<h2 id="tocS_SolveDto">SolveDto</h2>
+<!-- backwards compatibility -->
+<a id="schemasolvedto"></a>
+<a id="schema_SolveDto"></a>
+<a id="tocSsolvedto"></a>
+<a id="tocssolvedto"></a>
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "startUnixTimestamp": {
+      "type": "number",
+      "minimum": 1
+    },
+    "endUnixTimestamp": {
+      "type": "number",
+      "minimum": 1
+    },
+    "funds": {
+      "type": "number",
+      "minimum": 1
+    }
+  },
+  "required": [
+    "startUnixTimestamp",
+    "endUnixTimestamp",
+    "funds"
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|startUnixTimestamp|number|true|none|none|
+|endUnixTimestamp|number|true|none|none|
+|funds|number|true|none|none|
 
