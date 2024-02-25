@@ -70,7 +70,7 @@ jobs:
 
       - name: Upload new docs
         run: |
-          git add ./API_DOCUMENTATION.md -f
-          git commit -m "docs: update"
-          git push https://${{ secrets.PAT }}@github.com/StiliyanKushev/share-profit-calculator.git main
+          git add ./API_DOCUMENTATION.md -f || true
+          git commit -m "docs: update" || true
+          git push https://${{ secrets.PAT }}@github.com/StiliyanKushev/share-profit-calculator.git main || true
         working-directory: ./backend
