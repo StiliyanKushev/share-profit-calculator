@@ -20,7 +20,7 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json || true",
-        "pretest:e2e": "docker-compose up -d test-db test-redis",
+        "pretest:e2e": "npm run build && docker-compose up -d test-db test-redis",
         "posttest:e2e": "docker-compose stop test-db && docker-compose rm -f test-db test-redis"
     },
     "dependencies": {
