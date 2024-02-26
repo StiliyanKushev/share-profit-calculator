@@ -22,7 +22,7 @@ Passwords are obviously hashed. Users are stored in a database.<br/>
 This repo also hosts a really basic version of the API docs following the OpenAPI standard.<br/>
 It can be found [here](https://github.com/StiliyanKushev/share-profit-calculator/blob/main/backend/API_DOCUMENTATION.md) and is generated [like so](https://github.com/StiliyanKushev/share-profit-calculator/blob/main/.github/workflows/be.api.docs.yml).<br/>
 
-### Tech-stack
+### Tech stack
 The frontend implementation can be found [here](https://github.com/StiliyanKushev/share-profit-calculator/tree/main/frontend).<br/>
 The backend implementation can be found [here](https://github.com/StiliyanKushev/share-profit-calculator/tree/main/backend).<br/>
 
