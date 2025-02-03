@@ -36,6 +36,7 @@ git clone https://github.com/StiliyanKushev/share-profit-calculator.git;
 cd share-profit-calculator;
 cd backend;
 npm ci;
+cp .env.e2e .env;
 npm run docker:prepare;
 npm run start:dev &;
 cd ../frontend;
